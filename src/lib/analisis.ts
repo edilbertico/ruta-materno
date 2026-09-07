@@ -97,8 +97,18 @@ export function brechaDe(record?: MetricRecord): number | "" {
  * existe registro métrico.
  */
 export function buildAnalisis(ctx: AnalisisContexto): SeccionAnalisis[] {
-  const { record, a = VACIA, b, c = VACIA_C, rutaCompleta } = ctx;
+  const { record, a = VACIA, b, c = VACIA_C, d, rutaCompleta } = ctx;
   const secciones: SeccionAnalisis[] = [];
+
+  // Sección dedicada a datos del diligenciamiento (si hay algo diligenciado)
+  if (d && (d.fecha || d.problemaTrazador || d.fuenteInformacion || d.responsable)) {
+    const lineas: string[] = [];
+    if (d.fecha) lineas.push(`Fecha de diligenciamiento: ${formatearFecha(d.fecha)}.`);
+    if (d.problemaTrazador) lineas.push(`Problema trazador priorizado: ${d.problemaTrazador}.`);
+    if (d.fuenteInformacion) lineas.push(`Fuente de información: ${d.fuenteInformacion}.`);
+    if (d.responsable) lineas.push(`Responsable del diligenciamiento: ${d.responsable}.`);
+    if (lineas.length) secciones.push({ titulo: "Datos del diligenciamiento", parrafos: lineas });
+  }
 
   const contexto: string[] = [];
   if (b?.momento) {
@@ -164,7 +174,7 @@ export function buildAnalisis(ctx: AnalisisContexto): SeccionAnalisis[] {
     secciones.push({
       titulo: "Registro métrico no disponible",
       parrafos: [
-        "Este indicador no cuenta con registro métrico (meta o semáforo) en la lista maestra. Puede usar el Módulo C para explorar determinantes, barreras y canalizaciones asociadas.",
+        "El indicador seleccionado no cuenta con registro métrico en la lista maestra. Usa el Módulo C para explorar determinantes, barreras y canalizaciones asociadas, o descarga el análisis en PDF.",
       ],
     });
   } else {

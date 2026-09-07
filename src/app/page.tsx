@@ -167,6 +167,7 @@ export default function HomePage() {
           identificacion={selA}
           ruta={selB}
           consultaC={selC}
+          diligenciamiento={selD}
           onReset={handleReset}
           onExportJson={handleExport}
           onExportPdf={handleExportPdf}

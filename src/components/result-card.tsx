@@ -14,6 +14,7 @@ import type { MetricRecord } from "@/lib/types";
 import type { ModuleASelection } from "@/components/module-a";
 import type { ModuleBSelection } from "@/components/module-b";
 import type { ModuleCSelection } from "@/components/module-c";
+import type { ModuleDSelection } from "@/components/datos-diligenciamiento";
 import { brechaDe } from "@/lib/analisis";
 import { buildAnalisis } from "@/lib/analisis";
 import {
@@ -34,6 +35,7 @@ interface ResultCardProps {
   identificacion?: ModuleASelection;
   ruta?: ModuleBSelection;
   consultaC?: ModuleCSelection;
+  diligenciamiento?: ModuleDSelection;
   onReset: () => void;
   onExportJson: () => void;
   onExportPdf: () => void;
@@ -56,6 +58,7 @@ export function ResultCard({
   identificacion,
   ruta,
   consultaC,
+  diligenciamiento,
   onReset,
   onExportJson,
   onExportPdf,
@@ -75,6 +78,7 @@ export function ResultCard({
     a: identificacion,
     b: ruta,
     c: consultaC,
+    d: diligenciamiento,
     rutaCompleta: selectionComplete,
   });
 

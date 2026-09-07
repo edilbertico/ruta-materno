@@ -59,7 +59,7 @@ export function CascadeSelect({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
-          {options.map((option) => (
+          {(options ?? []).map((option) => (
             <SelectItem key={option} value={option}>
               {option}
             </SelectItem>
